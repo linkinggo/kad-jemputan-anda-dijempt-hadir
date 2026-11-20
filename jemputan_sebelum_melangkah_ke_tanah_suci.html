@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebelum Melangkah ke Tanah Suci</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--green:#075B48;--deep:#034535;--dark:#032F27;--pink:#E9BFCB;--rose:#C98FA2;--cream:#F7EFE7;--gold:#D5B477}
+body{margin:0;font-family:'DM Sans',sans-serif;background:var(--dark);overflow:hidden}
+.scene{width:100%;height:100vh;height:100dvh;min-height:570px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;isolation:isolate;background:radial-gradient(circle at 15% 20%,rgba(233,191,203,.14),transparent 27%),radial-gradient(circle at 85% 80%,rgba(213,180,119,.12),transparent 25%),linear-gradient(135deg,#032F27,#075B48 55%,#034535)}
+.scene::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 24px,rgba(255,255,255,.035) 25px,transparent 27px);pointer-events:none}
+.scene::after{content:"";position:absolute;inset:17px;border:1px solid rgba(213,180,119,.35);pointer-events:none}
+.corner{position:absolute;color:var(--gold);font-family:Georgia,serif;font-size:46px;opacity:.65;z-index:0;pointer-events:none}
+.tl{top:24px;left:28px}.tr{top:24px;right:28px;transform:rotate(90deg)}.bl{bottom:24px;left:28px;transform:rotate(-90deg)}.br{bottom:24px;right:28px;transform:rotate(180deg)}
+.sparkle{position:absolute;color:var(--gold);opacity:.6;animation:twinkle 3s ease-in-out infinite;pointer-events:none}
+.s1{top:17%;left:16%;font-size:20px}.s2{top:25%;right:15%;font-size:15px;animation-delay:1s}.s3{bottom:20%;left:12%;font-size:18px;animation-delay:1.5s}.s4{bottom:18%;right:17%;font-size:21px;animation-delay:.5s}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8) rotate(0)}50%{opacity:.9;transform:scale(1.2) rotate(25deg)}}
+.intro{position:absolute;top:9%;width:100%;text-align:center;color:var(--cream);z-index:1;transition:opacity .5s ease;pointer-events:none}
+.intro p{margin:0;color:var(--pink);font-size:10px;font-weight:800;letter-spacing:4px}
+.intro h1{font-family:'Playfair Display',serif;font-size:clamp(23px,4vw,37px);font-weight:600;margin:12px 15px}
+.intro .line{width:75px;height:2px;background:var(--gold);margin:14px auto}
+.envelope-stage{position:absolute;z-index:6;width:min(390px,80vw);height:235px;left:50%;top:50%;transform:translate(-50%,-50%);transition:top 1.15s cubic-bezier(.6,0,.4,1),opacity .65s ease;pointer-events:none}
+.envelope{position:absolute;inset:0;background:linear-gradient(145deg,#E9BFCB,#DCA9B8);border-radius:8px;box-shadow:0 25px 55px rgba(0,0,0,.35)}
+.envelope::before{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.65);border-radius:8px;z-index:5;pointer-events:none}
+.envelope-body{position:absolute;inset:0;border-radius:8px;overflow:hidden}
+.envelope-body::before{content:"";position:absolute;inset:0;background:linear-gradient(35deg,transparent 49.5%,rgba(201,143,162,.65) 50%,transparent 50.5%),linear-gradient(-35deg,transparent 49.5%,rgba(201,143,162,.65) 50%,transparent 50.5%)}
+.envelope-flap{position:absolute;top:0;left:0;width:100%;height:125px;background:linear-gradient(145deg,#075B48,#034535);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transition:transform .75s ease;z-index:7;filter:drop-shadow(0 4px 3px rgba(0,0,0,.15))}
+.envelope-seal{position:absolute;z-index:8;top:88px;left:50%;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,#D5B477,#B99250);border:3px solid #F7E6C5;display:flex;align-items:center;justify-content:center;color:#fff8e8;font-family:Georgia,serif;font-size:23px;box-shadow:0 4px 10px rgba(0,0,0,.2);transition:opacity .25s ease}
+.envelope-label{position:absolute;bottom:23px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:4px;color:#714657;font-weight:800;z-index:3}
+.envelope-stage.open .envelope-flap{transform:rotateX(180deg)}.envelope-stage.open .envelope-seal{opacity:0}.envelope-stage.go-down{top:125%;opacity:0}
+.open-button{position:absolute;z-index:12;left:50%;top:calc(50% + 155px);transform:translateX(-50%);border:1px solid var(--gold);background:var(--cream);color:var(--deep);padding:13px 27px;border-radius:30px;font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:2px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.2);transition:opacity .35s ease,transform .3s ease}
+.open-button:hover{background:var(--pink)}.open-button.hide{opacity:0;pointer-events:none}
+.card{position:absolute;z-index:4;width:min(940px,92vw);height:min(510px,72vh);height:min(510px,72dvh);min-height:420px;left:50%;top:50%;transform:translate(-50%,8%) scale(.72);opacity:0;pointer-events:none;perspective:1500px;transition:transform 1.5s cubic-bezier(.2,.75,.25,1),opacity .4s ease}
+.card.emerge{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+.card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.2,.7,.2,1)}
+.card.flip-back .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:15px;border:2px solid var(--gold);box-shadow:0 25px 70px rgba(0,0,0,.35)}
+.card-front{background:var(--cream)}
+.card-back{background:var(--deep);color:var(--cream);transform:rotateY(180deg);display:flex;align-items:center;justify-content:center;text-align:center}
+.paper-pattern{position:absolute;inset:0;pointer-events:none;opacity:.42;background:repeating-linear-gradient(135deg,transparent 0,transparent 18px,rgba(7,91,72,.07) 19px,transparent 21px)}
+.paper-pattern::before,.paper-pattern::after{content:"❧";position:absolute;color:var(--rose);font-size:55px;opacity:.5}
+.paper-pattern::before{top:8px;right:20px;transform:rotate(35deg)}.paper-pattern::after{bottom:5px;left:20px;transform:rotate(210deg)}
+.card-content{position:relative;z-index:1;height:100%;padding:23px 32px 19px;display:flex;flex-direction:column}
+.top-heading{text-align:center;margin-bottom:12px}
+.top-heading .small-title{color:var(--rose);font-size:9px;letter-spacing:4px;font-weight:800}
+.top-heading h2{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);color:var(--deep);margin:5px 0 4px;line-height:1.15}
+.top-heading .gold-line{width:72px;height:2px;background:var(--gold);margin:8px auto 0}
+.main-layout{display:grid;grid-template-columns:34% 1fr;gap:28px;flex:1;min-height:0;align-items:center}
+.photo-column{height:100%;min-height:190px;display:flex;align-items:center;justify-content:center;position:relative}
+.portrait{width:100%;max-width:220px;height:96%;max-height:330px;min-height:170px;padding:7px;background:linear-gradient(145deg,#F4DCA9,#B99250,#F6E5BD);border-radius:50% 50% 12px 12px / 34% 34% 12px 12px;box-shadow:0 12px 25px rgba(3,47,39,.2);position:relative;transform:rotate(-1deg)}
+.portrait::before{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,255,.85);border-radius:inherit;z-index:2;pointer-events:none}
+.portrait::after{content:"✧";position:absolute;top:-13px;right:-14px;font-size:35px;color:var(--gold);z-index:3}
+.portrait img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;border-radius:50% 50% 9px 9px / 34% 34% 9px 9px}
+.photo-column::after{content:"❧";position:absolute;bottom:-5px;right:5px;font-size:35px;color:var(--rose);transform:rotate(-25deg)}
+.details{padding:4px 8px 4px 0}
+.details .greeting{color:var(--rose);font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:8px}
+.details h3{font-family:'Playfair Display',serif;font-size:clamp(19px,2.3vw,26px);line-height:1.25;color:var(--deep);margin:0 0 11px}
+.details .event-name{font-size:10px;letter-spacing:1.8px;font-weight:800;color:#A66F80;margin-bottom:10px}
+.details .description{color:#5F625C;font-size:11px;line-height:1.7;margin:0}
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:13px}
+.info-box{background:rgba(7,91,72,.08);border:1px solid rgba(7,91,72,.15);border-radius:9px;padding:10px 8px;text-align:center;min-width:0}
+.info-label{color:#A66F80;font-size:8px;letter-spacing:2px;font-weight:800;margin-bottom:5px}
+.info-value{color:var(--deep);font-size:11px;font-weight:800;line-height:1.4}
+.closing{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:11px;padding-top:9px;border-top:1px solid rgba(7,91,72,.16)}
+.closing-text{color:var(--deep);font-family:'Playfair Display',serif;font-size:13px;font-style:italic}
+.organizer{font-size:9px;letter-spacing:2.5px;color:#A66F80;font-weight:800;white-space:nowrap}
+.back-content{position:relative;z-index:1;padding:35px;max-width:650px}
+.back-content .ornament{color:var(--gold);font-size:38px;margin-bottom:12px}
+.back-content h2{font-family:'Playfair Display',serif;color:var(--pink);font-size:clamp(27px,4vw,42px);margin:0 0 18px}
+.back-content p{font-family:'Playfair Display',serif;font-size:clamp(16px,2vw,21px);line-height:1.8;color:var(--cream);margin:0}
+.back-line{width:75px;height:2px;background:var(--gold);margin:23px auto}
+.back-organizer{color:var(--pink);font-size:10px;letter-spacing:4px;font-weight:800}
+.controls{position:absolute;z-index:15;bottom:3%;left:50%;transform:translateX(-50%);display:flex;gap:12px;opacity:0;pointer-events:none;transition:opacity .5s ease;width:max-content}
+.controls.show{opacity:1;pointer-events:auto}
+.controls button{border:1px solid var(--gold);background:var(--cream);color:var(--deep);border-radius:30px;padding:11px 19px;font-size:10px;letter-spacing:1.3px;font-weight:800;font-family:'DM Sans',sans-serif;cursor:pointer;transition:.25s}
+.controls button:hover{background:var(--pink);transform:translateY(-2px)}
+@media(max-width:700px){
+.scene{min-height:580px}.intro{top:5%}.intro p{font-size:8px;letter-spacing:3px}.intro h1{font-size:24px}
+.card{width:94vw;height:min(490px,72dvh);min-height:420px;top:47%}
+.card-content{padding:17px 14px 13px}.top-heading{margin-bottom:8px}
+.top-heading .small-title{font-size:8px;letter-spacing:2px}.top-heading h2{font-size:21px}
+.main-layout{grid-template-columns:35% 1fr;gap:12px}.photo-column{min-height:165px}
+.portrait{min-height:155px;max-height:245px}
+.details .greeting{font-size:8px;letter-spacing:1.5px}.details h3{font-size:16px;margin-bottom:8px}
+.details .event-name{font-size:8px;letter-spacing:.8px}.details .description{font-size:9px;line-height:1.5}
+.info-row{gap:5px;margin-top:10px}.info-box{padding:9px 3px}
+.info-label{font-size:7px;letter-spacing:1px}.info-value{font-size:9px}
+.closing{margin-top:9px;padding-top:8px}.closing-text{font-size:10px}
+.organizer{font-size:7px;letter-spacing:1.5px}
+.envelope-stage{width:75vw;height:190px}.envelope-flap{height:100px}
+.envelope-seal{top:72px;width:42px;height:42px}.open-button{top:calc(50% + 130px)}
+.controls{bottom:2%;gap:7px}.controls button{padding:10px 12px;font-size:8px}
+.back-content{padding:22px}
+}
+@media(max-width:380px){
+.card{width:95vw;height:430px}.card-content{padding:14px 10px 11px}
+.main-layout{gap:9px}.details h3{font-size:14px}.details .description{font-size:8px}
+.info-value{font-size:8px}.closing-text{font-size:9px}
+}
+@media(max-height:650px) and (min-width:701px){
+.card{height:440px}.card-content{padding-top:15px;padding-bottom:12px}.intro{top:3%}
+}
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div class="corner tl">❧</div><div class="corner tr">❧</div><div class="corner bl">❧</div><div class="corner br">❧</div>
+  <div class="sparkle s1">✧</div><div class="sparkle s2">✦</div><div class="sparkle s3">✧</div><div class="sparkle s4">✦</div>
+  <div class="intro" id="intro">
+    <p>SEBUAH JEMPUTAN ISTIMEWA</p>
+    <h1>Sebelum Melangkah ke Tanah Suci</h1>
+    <div class="line"></div>
+  </div>
+  <div class="envelope-stage" id="envelopeStage">
+    <div class="envelope">
+      <div class="envelope-body"></div><div class="envelope-flap"></div>
+      <div class="envelope-seal">V</div><div class="envelope-label">A SPECIAL INVITATION</div>
+    </div>
+  </div>
+  <div class="card" id="card">
+    <div class="card-inner">
+      <div class="card-face card-front">
+        <div class="paper-pattern"></div>
+        <div class="card-content">
+          <div class="top-heading">
+            <div class="small-title">DENGAN PENUH KESYUKURAN</div>
+            <h2>SEBELUM MELANGKAH<br>KE TANAH SUCI</h2>
+            <div class="gold-line"></div>
+          </div>
+          <div class="main-layout">
+            <div class="photo-column"><div class="portrait">
+              <img src="https://plain-apac-prod-public.komododecks.com/202611/20/qoSl4ZekZbliPIkDljFm/image.png" alt="Gambar pensyarah">
+            </div></div>
+            <div class="details">
+              <div class="greeting">JEMPUTAN KHAS BUAT</div>
+              <h3>Dr. Mohammad Syakerul Haniz bin Mohammad Sabri</h3>
+              <div class="event-name">MAJLIS MAKAN MALAM PERPISAHAN</div>
+              <p class="description">Dengan segala hormatnya, pihak kami berbesar hati menjemput Dr. untuk bersama-sama memeriahkan majlis makan malam perpisahan ini sebagai tanda penghargaan dan kenangan sebelum melangkah ke Tanah Suci.</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-box"><div class="info-label">TARIKH</div><div class="info-value">20 NOVEMBER 2026<br>JUMAAT</div></div>
+            <div class="info-box"><div class="info-label">MASA</div><div class="info-value">8.45 MALAM</div></div>
+            <div class="info-box"><div class="info-label">TEMPAT</div><div class="info-value">AB-2-23</div></div>
+          </div>
+          <div class="closing">
+            <div class="closing-text">Semoga memperoleh Umrah yang mabrur</div>
+            <div class="organizer">ANJURAN VELMORA</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-face card-back">
+        <div class="paper-pattern"></div>
+        <div class="back-content">
+          <div class="ornament">✧ ❧ ✧</div>
+          <h2>Setulus Penghargaan</h2>
+          <p>Semoga perjalanan menuju Tanah Suci dipermudahkan, dikurniakan kesihatan, ketenangan dan keberkatan sepanjang menunaikan ibadah.</p>
+          <div class="back-line"></div>
+          <p>Semoga kembali dengan membawa seribu kenangan dan keberkatan.</p>
+          <div class="ornament">❧</div><div class="back-organizer">ANJURAN VELMORA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="open-button" id="openButton" onclick="openInvitation()">✉ BUKA JEMPUTAN</button>
+  <div class="controls" id="controls">
+    <button id="flipButton" onclick="flipCard()">↻ FLIP SURAT</button>
+    <button onclick="closeInvitation()">✕ TUTUP JEMPUTAN</button>
+  </div>
+</div>
+<script>
+const scene=document.getElementById("scene");
+const envelopeStage=document.getElementById("envelopeStage");
+const card=document.getElementById("card");
+const openButton=document.getElementById("openButton");
+const controls=document.getElementById("controls");
+const flipButton=document.getElementById("flipButton");
+const intro=document.getElementById("intro");
+let isOpen=false,isFlipped=false,timers=[];
+let audioContext=null,musicPlaying=false,musicTimer=null,melodyIndex=0;
+
+function getAudio(){
+  if(!audioContext){
+    const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+    if(!AudioContextClass)return null;
+    audioContext=new AudioContextClass();
+  }
+  if(audioContext.state==="suspended")audioContext.resume();
+  return audioContext;
+}
+function tone(frequency,duration,volume,type="sine",delay=0){
+  const ctx=getAudio();if(!ctx)return;
+  const oscillator=ctx.createOscillator(),gain=ctx.createGain();
+  oscillator.type=type;
+  oscillator.frequency.setValueAtTime(frequency,ctx.currentTime+delay);
+  gain.gain.setValueAtTime(.0001,ctx.currentTime+delay);
+  gain.gain.exponentialRampToValueAtTime(volume,ctx.currentTime+delay+.04);
+  gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+duration);
+  oscillator.connect(gain);gain.connect(ctx.destination);
+  oscillator.start(ctx.currentTime+delay);
+  oscillator.stop(ctx.currentTime+delay+duration+.05);
+}
+function playOpenSound(){
+  tone(523.25,.55,.10,"sine",0);
+  tone(659.25,.65,.09,"sine",.12);
+  tone(783.99,.8,.08,"sine",.25);
+}
+function playLetterSound(){tone(440,.4,.05,"triangle",0);tone(587.33,.55,.06,"sine",.12)}
+function playFlipSound(){tone(659.25,.22,.05,"sine",0);tone(783.99,.3,.05,"sine",.1)}
+function playCloseSound(){tone(587.33,.3,.05,"sine",0);tone(440,.4,.04,"sine",.12)}
+
+const notes=[
+392,440,493.88,587.33,523.25,493.88,440,392,
+349.23,392,440,523.25,493.88,440,392,349.23,
+329.63,392,440,523.25,587.33,523.25,493.88,440,
+392,440,493.88,523.25,493.88,440,392,329.63
+];
+function playMusicNote(){
+  if(!musicPlaying)return;
+  const ctx=getAudio();if(!ctx)return;
+  const frequency=notes[melodyIndex%notes.length],now=ctx.currentTime;
+  const lead=ctx.createOscillator(),leadGain=ctx.createGain();
+  lead.type="triangle";lead.frequency.setValueAtTime(frequency,now);
+  leadGain.gain.setValueAtTime(.0001,now);
+  leadGain.gain.linearRampToValueAtTime(.075,now+.08);
+  leadGain.gain.setValueAtTime(.075,now+.38);
+  leadGain.gain.exponentialRampToValueAtTime(.0001,now+.85);
+  lead.connect(leadGain);leadGain.connect(ctx.destination);
+  lead.start(now);lead.stop(now+.9);
+  const harmony=ctx.createOscillator(),harmonyGain=ctx.createGain();
+  harmony.type="sine";harmony.frequency.setValueAtTime(frequency/2,now);
+  harmonyGain.gain.setValueAtTime(.0001,now);
+  harmonyGain.gain.linearRampToValueAtTime(.035,now+.15);
+  harmonyGain.gain.exponentialRampToValueAtTime(.0001,now+1.05);
+  harmony.connect(harmonyGain);harmonyGain.connect(ctx.destination);
+  harmony.start(now);harmony.stop(now+1.1);
+  melodyIndex++;
+}
+function startMusic(){
+  if(musicPlaying)return;
+  const ctx=getAudio();if(!ctx)return;
+  musicPlaying=true;melodyIndex=0;
+  playMusicNote();
+  musicTimer=setInterval(playMusicNote,650);
+}
+function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+function later(fn,delay){timers.push(setTimeout(fn,delay))}
+
+function openInvitation(){
+  if(isOpen)return;
+  clearTimers();isOpen=true;isFlipped=false;
+  card.classList.remove("flip-back");
+  flipButton.textContent="↻ FLIP SURAT";
+  openButton.classList.add("hide");
+  intro.style.opacity="0";
+  startMusic();
+  playOpenSound();
+  envelopeStage.classList.add("open");
+  later(()=>{card.classList.add("emerge");playLetterSound()},450);
+  later(()=>envelopeStage.classList.add("go-down"),850);
+  later(()=>controls.classList.add("show"),2100);
+}
+scene.addEventListener("click",function(event){
+  if(isOpen)return;
+  if(event.target.closest("button"))return;
+  openInvitation();
+});
+function flipCard(){
+  if(!isOpen)return;
+  isFlipped=!isFlipped;
+  card.classList.toggle("flip-back",isFlipped);
+  flipButton.textContent=isFlipped?"↻ LIHAT HADAPAN":"↻ FLIP SURAT";
+  playFlipSound();
+}
+function closeInvitation(){
+  clearTimers();isOpen=false;isFlipped=false;
+  controls.classList.remove("show");
+  card.classList.remove("flip-back","emerge");
+  flipButton.textContent="↻ FLIP SURAT";
+  playCloseSound();
+  later(()=>{
+    envelopeStage.classList.remove("go-down","open");
+    intro.style.opacity="1";
+    openButton.classList.remove("hide");
+  },700);
+}
+</script>
+</body>
+</html>
